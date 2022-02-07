@@ -1,0 +1,21 @@
+import numpy as np
+from scipy.stats import norm
+
+d1 = lambda S, K, T, r, sig: (np.log(S/K)+(r+sig**2/2)*T)/(sig*np.sqrt(T))
+d2 = lambda S, K, T, r, sig: d1(S, K, T, r, sig)-sig*np.sqrt(T)
+
+call_price = lambda S, K, T, r, sig: S*norm.cdf(d1(S,K,T,r,sig))-K*np.exp(-r*T)*norm.cdf(d2(S,K,T,r,sig))
+put_price = lambda S, K, T, r, sig: K*np.exp(-r*T)-S + call_price(S,K,T,r,sig)
+
+call_delta = lambda S, K, T, r, sig: norm.cdf(d1(S,K,T,r,sig))
+put_delta = lambda S, K, T, r, sig: -norm.cdf(-d1(S,K,T,r,sig))
+
+gamma  = lambda S, K, T, r, sig:  norm.pdf(d1(S,K,T,r,sig))/(S*sig*np.sqrt(T))
+
+vega = lambda S, K, T, r, sig: S*norm.pdf(d1(S,K,T,r,sig))*np.sqrt(T)
+
+call_theta = lambda S, K, T, r, sig: -(S*norm.pdf(d1(S,K,T,r,sig))*sig)/(2*np.sqrt(T)) - r*K*np.exp(-r*T)*norm.cdf(d2(S,K,T,r,sig))
+put_theta = lambda S, K, T, r, sig: -(S*norm.pdf(d1(S,K,T,r,sig))*sig)/(2*np.sqrt(T)) + r*K*np.exp(-r*T)*norm.cdf(-d2(S,K,T,r,sig))
+
+call_rho = lambda S, K, T, r, sig: K*T*np.exp(-r*T)*norm.cdf(d2(S,K,T,r,sig))
+put_rho = lambda S, K, T, r, sig: -K*T*exp(-r*T)*norm.cdf(-d2(S,K,T,r,sig))
