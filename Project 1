@@ -18,4 +18,4 @@ call_theta = lambda S, K, T, r, sig: -(S*norm.pdf(d1(S,K,T,r,sig))*sig)/(2*np.sq
 put_theta = lambda S, K, T, r, sig: -(S*norm.pdf(d1(S,K,T,r,sig))*sig)/(2*np.sqrt(T)) + r*K*np.exp(-r*T)*norm.cdf(-d2(S,K,T,r,sig))
 
 call_rho = lambda S, K, T, r, sig: K*T*np.exp(-r*T)*norm.cdf(d2(S,K,T,r,sig))
-put_rho = lambda S, K, T, r, sig: -K*T*exp(-r*T)*norm.cdf(-d2(S,K,T,r,sig))
+put_rho = lambda S, K, T, r, sig: -K*T*np.exp(-r*T)*norm.cdf(-d2(S,K,T,r,sig))
