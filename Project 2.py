@@ -130,3 +130,6 @@ M = int(input("How many steps of binomial simulation that you what?   "))
 finaldata = list(runfunc(kind, S0, T, r, sig, M, K))
 print(f"{kind} of underlying at ${S0} with strike price ${K} is priced at ${finaldata[0]}.")
 print(f"{kind}'s delta is {list(finaldata[1])[0]}, gamma is {list(finaldata[1])[1]}, vega is {list(finaldata[1])[2]}, theta is {list(finaldata[1])[3]} and rho is {list(finaldata[1])[4]}.")
+
+# for the european option part, I use some of code from FM 5151 Class in last semester
+# for the amerivan option part, some of the idea are from this wedsite https://asxportfolio.com/options-binomial-trees-american-option-pricing
