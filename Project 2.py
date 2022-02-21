@@ -94,16 +94,14 @@ def greeks(kind, S, K, T, r, sig):
         call_delta = lambda S, K, T, r, sig: norm.cdf(d1(S, K, T, r, sig))
         gamma = lambda S, K, T, r, sig: norm.pdf(d1(S, K, T, r, sig)) / (S * sig * np.sqrt(T))
         vega = lambda S, K, T, r, sig: S * norm.pdf(d1(S, K, T, r, sig)) * np.sqrt(T)
-        call_theta = lambda S, K, T, r, sig: -(S * norm.pdf(d1(S, K, T, r, sig)) * sig) / (
-                    2 * np.sqrt(T)) - r * K * np.exp(-r * T) * norm.cdf(d2(S, K, T, r, sig))
+        call_theta = lambda S, K, T, r, sig: -(S * norm.pdf(d1(S, K, T, r, sig)) * sig) / (2 * np.sqrt(T)) - r * K * np.exp(-r * T) * norm.cdf(d2(S, K, T, r, sig))
         call_rho = lambda S, K, T, r, sig: K * T * np.exp(-r * T) * norm.cdf(d2(S, K, T, r, sig))
         return call_delta(S, K, T, r, sig), gamma(S, K, T, r, sig), vega(S, K, T, r, sig), call_theta(S, K, T, r, sig), call_rho(S, K, T, r, sig)
     elif kind == "American Put" or kind == "European Put":
         put_delta = lambda S, K, T, r, sig: -norm.cdf(-d1(S, K, T, r, sig))
         gamma = lambda S, K, T, r, sig: norm.pdf(d1(S, K, T, r, sig)) / (S * sig * np.sqrt(T))
         vega = lambda S, K, T, r, sig: S * norm.pdf(d1(S, K, T, r, sig)) * np.sqrt(T)
-        put_theta = lambda S, K, T, r, sig: -(S * norm.pdf(d1(S, K, T, r, sig)) * sig) / (
-                    2 * np.sqrt(T)) + r * K * np.exp(-r * T) * norm.cdf(-d2(S, K, T, r, sig))
+        put_theta = lambda S, K, T, r, sig: -(S * norm.pdf(d1(S, K, T, r, sig)) * sig) / (2 * np.sqrt(T)) + r * K * np.exp(-r * T) * norm.cdf(-d2(S, K, T, r, sig))
         put_rho = lambda S, K, T, r, sig: -K * T * np.exp(-r * T) * norm.cdf(-d2(S, K, T, r, sig))
         return put_delta(S, K, T, r, sig), gamma(S, K, T, r, sig), vega(S, K, T, r, sig), put_theta(S, K, T, r, sig), put_rho(S, K, T, r, sig)
 
