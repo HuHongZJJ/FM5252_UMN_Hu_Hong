@@ -1,8 +1,6 @@
-import pandas as pd
 from scipy.stats import norm
 import numpy as np
 import yfinance as yf
-import matplotlib.pyplot as plt
 import scipy.optimize
 # section 1
 
