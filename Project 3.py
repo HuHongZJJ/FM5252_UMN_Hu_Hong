@@ -105,8 +105,8 @@ def sviCurve (x, a, b, rho, m,sigma):
 
     #if b > 0 and np.abs(rho) < 0 and sigma>0:
     result = a+b*(rho*(x-m)+np.sqrt((x-m)**2 + sigma**2))
-    std = np.sqrt(result)
-    return std
+    
+    return result
 
 def sviFit (impliedvol,strikes):
     o = scipy.optimize.curve_fit(sviCurve, strikes, impliedvol, maxfev= 1000000)
